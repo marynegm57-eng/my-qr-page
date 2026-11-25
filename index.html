@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Secret For You</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Playfair+Display:wght@500;600&display=swap');
+*{box-sizing:border-box} body{margin:0;min-height:100vh;font-family:'Cairo',sans-serif;background:radial-gradient(ellipse at 50% 35%,#25233a 0%,#11111c 55%,#090910 100%);color:#f7f1fa;display:grid;place-items:center;padding:22px;overflow:hidden}
+.stars{position:fixed;inset:0;pointer-events:none;background-image:radial-gradient(1px 1px at 20% 25%,#fff9 99%,transparent),radial-gradient(1px 1px at 75% 18%,#fff8 99%,transparent),radial-gradient(1px 1px at 82% 70%,#fff7 99%,transparent),radial-gradient(1px 1px at 15% 78%,#fff8 99%,transparent),radial-gradient(2px 2px at 50% 12%,#fff6 99%,transparent)}
+.panel{position:relative;width:min(100%,430px);text-align:center;padding:38px 26px;border:1px solid #ffffff20;border-radius:26px;background:#ffffff09;box-shadow:0 24px 80px #0008;backdrop-filter:blur(10px)}
+.eyebrow{font:500 12px 'Playfair Display',serif;letter-spacing:3px;color:#c9bfdc;text-transform:uppercase}.lock{font-size:38px;margin:18px 0 10px}.heading{font-size:25px;font-weight:700;line-height:1.6;margin:8px 0}.sub{color:#bcb5c9;font-size:14px;line-height:1.9;margin:8px 0 24px}
+input{width:100%;border:1px solid #ffffff35;background:#ffffff0d;color:#fff;border-radius:13px;padding:14px 16px;font:600 16px 'Cairo',sans-serif;text-align:center;outline:none}input:focus{border-color:#c9a9e8;box-shadow:0 0 0 3px #c9a9e822}input::placeholder{color:#aaa2b8}
+button{width:100%;border:0;border-radius:13px;padding:13px 18px;margin-top:13px;background:linear-gradient(100deg,#b69ad7,#8065a9);color:white;font:700 15px 'Cairo',sans-serif;cursor:pointer;box-shadow:0 8px 24px #8065a944}button:active{transform:scale(.99)}
+#error{min-height:26px;margin-top:10px;color:#f0a6b8;font-size:13px}.tiny{font-size:11px;color:#777184;margin-top:20px}
+#secret{display:none;background:radial-gradient(ellipse at 50% 30%,#fff5f8 0%,#ffe8f0 55%,#f8dce8 100%);color:#75465d;min-height:100vh;width:100%;position:fixed;inset:0;place-items:center;padding:24px;overflow:hidden}
+#secret.show{display:grid;animation:fade .9s ease both}.letter{position:relative;text-align:center;width:min(100%,440px);padding:45px 25px;border:1px solid #e9b8cc;border-radius:30px;background:#ffffffa8;box-shadow:0 20px 70px #a85b7b20;animation:pop 1s cubic-bezier(.2,.8,.2,1) both}.small{font:500 12px 'Playfair Display',serif;letter-spacing:2px;color:#b47b94}.heart{font-size:45px;margin:20px 0 8px;animation:beat 1.4s infinite}.love{font-size:clamp(27px,7vw,36px);font-weight:800;color:#b84f7b;margin:8px 0 14px}.sprinkle{font-size:19px;letter-spacing:7px;color:#d78aa8}.foot{font-size:12px;color:#a8788d;margin-top:25px}
+@keyframes fade{from{opacity:0}to{opacity:1}}@keyframes pop{from{transform:translateY(18px) scale(.96);opacity:0}to{transform:none;opacity:1}}@keyframes beat{0%,100%{transform:scale(1)}50%{transform:scale(1.13)}}
+</style>
+</head>
+<body>
+<div class="stars"></div>
+<main class="panel" id="gate">
+  <div class="eyebrow">A PRIVATE LITTLE MYSTERY</div>
+  <div class="lock">◈</div>
+  <h1 class="heading">هناك سرّ ينتظرك...</h1>
+  <p class="sub">Not everything is meant to be found.<br>Some things are meant to be unlocked.</p>
+  <form id="unlockForm">
+    <input id="password" type="password" placeholder="اكتب كلمة السر هنا" autocomplete="off" aria-label="كلمة السر">
+    <button type="submit">Unlock the secret ✦</button>
+  </form>
+  <div id="error" aria-live="polite"></div>
+  <div class="tiny">ONLY THE RIGHT PERSON CAN OPEN THIS</div>
+</main>
+<section id="secret" aria-live="polite">
+  <div class="letter">
+    <div class="small">A LITTLE SECRET, JUST FOR YOU</div>
+    <div class="heart">💗</div>
+    <div class="love">بحبك يا محمد ❤️</div>
+    <div class="sprinkle">♡ ✧ ♡ ✧ ♡</div>
+    <div class="foot">Some feelings are worth keeping close.</div>
+  </div>
+</section>
+<script>
+const form=document.getElementById('unlockForm');
+form.addEventListener('submit',function(e){e.preventDefault();const value=document.getElementById('password').value.trim();if(value==='بحبك'){document.getElementById('gate').style.display='none';document.querySelector('.stars').style.display='none';document.getElementById('secret').classList.add('show');}else{document.getElementById('error').textContent='Wrong password… Try again ✦';document.getElementById('password').value='';document.getElementById('password').focus();}});
+</script>
+</body>
+</html>
